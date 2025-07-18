@@ -12,8 +12,28 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.0.5 (Current)
+### Version 1.1.0 (Current)
 **Date**: Current Release  
+**Changes**:
+- **FAQ Chat Integration**: Enhanced floating chat with FAQ functionality
+  - Created shared FAQ data structure in `lib/faq-data.ts` with TypeScript interfaces
+  - Updated FAQ component to use centralized data source
+  - Added FAQ quick access section to chat window with clickable questions
+  - Implemented FAQ click handler that adds both question and answer to chat history
+  - Enhanced chat welcome message to guide users to FAQ functionality
+  - Increased chat window height to accommodate new FAQ section
+- **Components Modified**:
+  - `lib/faq-data.ts` - New shared FAQ data structure with categories and tags
+  - `components/faq.tsx` - Updated to use shared data from lib/faq-data.ts
+  - `components/floating-chat.tsx` - Major enhancement with FAQ integration
+- **UI/UX Improvements**:
+  - Added HelpCircle icon and visual indicators for FAQ section
+  - Implemented hover animations for FAQ question buttons
+  - Responsive FAQ section with scrollable area for better mobile experience
+  - Consistent styling with blue theme for FAQ elements
+
+### Version 1.0.5
+**Date**: Previous Release  
 **Changes**:
 - **Navigation Enhancement**: Added smooth scrolling navigation functionality
   - "Home" button scrolls to hero section (#home)

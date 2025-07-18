@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { FloatingChat } from "@/components/floating-chat"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -38,7 +39,10 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${inter.className} antialiased`}>
+        {children}
+        <FloatingChat />
+      </body>
     </html>
   )
 }
