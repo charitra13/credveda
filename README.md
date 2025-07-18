@@ -12,8 +12,18 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.1.0 (Current)
+### Version 1.1.1 (Current)
 **Date**: Current Release  
+**Changes**:
+- **FAQ Content Update**: Corrected NBFC connection claims
+  - Updated FAQ answer for "Can I compare loans from multiple NBFCs?"
+  - Removed inaccurate "500+ NBFCs" claim and replaced with "a network of NBFCs"
+  - Maintained functionality while ensuring content accuracy
+- **Components Modified**:
+  - `lib/faq-data.ts` - Updated FAQ answer to be more accurate about NBFC connections
+
+### Version 1.1.0
+**Date**: Previous Release  
 **Changes**:
 - **FAQ Chat Integration**: Enhanced floating chat with FAQ functionality
   - Created shared FAQ data structure in `lib/faq-data.ts` with TypeScript interfaces

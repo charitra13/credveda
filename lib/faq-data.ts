@@ -24,7 +24,7 @@ export const faqData: FAQItem[] = [
   {
     id: "compare-loans-nbfcs",
     question: "Can I compare loans from multiple NBFCs?",
-    answer: "Yes, CredVeda connects you with 500+ NBFCs and financial advisors, allowing you to compare interest rates, terms, and conditions across multiple lenders to find the best deal.",
+    answer: "Yes, CredVeda connects you with a network of NBFCs and financial advisors, allowing you to compare interest rates, terms, and conditions across multiple lenders to find the best deal.",
     category: "loans",
     tags: ["loans", "NBFCs", "comparison", "lenders", "rates"]
   },
