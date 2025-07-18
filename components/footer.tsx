@@ -4,13 +4,25 @@ import { motion } from "framer-motion"
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
 
 export function Footer() {
-  const navItems = ["Home", "Features", "About", "Sign Up"]
+  const navItems = [
+    { name: "Home", href: "#home" },
+    { name: "Features", href: "#features" },
+    { name: "About", href: "#about" },
+    { name: "FAQ", href: "#faq" },
+  ]
   const socialIcons = [
     { icon: Facebook, href: "#" },
     { icon: Twitter, href: "#" },
     { icon: Linkedin, href: "#" },
     { icon: Instagram, href: "#" },
   ]
+
+  const handleNavClick = (href: string) => {
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <footer className="bg-gray-900 text-white py-16">
@@ -58,17 +70,17 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <nav className="space-y-3">
               {navItems.map((item, index) => (
-                <motion.a
-                  key={item}
-                  href="#"
+                <motion.button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.href)}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                   viewport={{ once: true }}
-                  className="block text-gray-300 hover:text-[#0192dd] transition-colors duration-200"
+                  className="block text-left text-gray-300 hover:text-[#0192dd] transition-colors duration-200 bg-transparent border-none cursor-pointer"
                 >
-                  {item}
-                </motion.a>
+                  {item.name}
+                </motion.button>
               ))}
             </nav>
           </motion.div>
