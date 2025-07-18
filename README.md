@@ -12,8 +12,20 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.1.8 (Current)
+### Version 1.1.9 (Current)
 **Date**: Current Release  
+**Changes**:
+- **Analysis Type Cards Text Alignment Enhancement**: Improved text centering and readability in analysis type cards
+  - **Perfect Centering**: Enhanced vertical and horizontal text alignment for optimal visual balance
+  - **Layout Optimization**: Simplified flex layout structure for better center positioning
+  - **Spacing Improvements**: Added horizontal padding (`px-4`) for better text breathing room
+  - **Text Readability**: Added `font-medium` weight and `max-w-xs` width constraint for improved readability
+  - **Visual Balance**: Ensured text is perfectly centered within each card's content area
+- **Components Modified**:
+  - `components/card-design.tsx` - Enhanced text alignment and spacing
+
+### Version 1.1.8
+**Date**: Previous Release  
 **Changes**:
 - **Analysis Type Cards Content Simplification**: Removed unnecessary text elements and optimized card height for better design hierarchy
   - **Text Removal**: Removed circular text elements ("GREEN TIER", "Personal", "AI Analytics") and bottom text sections from all three analysis type cards

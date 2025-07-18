@@ -80,9 +80,9 @@ export function CardDesign() {
                 </div>
 
                 {/* Central content area */}
-                <div className="flex-1 flex flex-col items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-lg text-white/90 leading-relaxed">
+                <div className="flex-1 flex items-center justify-center px-4">
+                  <div className="text-center max-w-xs">
+                    <p className="text-lg text-white/90 leading-relaxed font-medium">
                       {card.description}
                     </p>
                   </div>
