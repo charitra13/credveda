@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Play } from "lucide-react"
 
 export function Hero() {
-  const trustBadges = ["Bloomberg", "ET", "Business Standard", "Economic Times"]
-
   return (
     <section className="pt-24 pb-12 lg:pt-32 lg:pb-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,29 +55,6 @@ export function Hero() {
                 <Play className="mr-2 h-5 w-5" />
                 WATCH DEMO
               </Button>
-            </motion.div>
-
-            {/* Trust Badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="space-y-4"
-            >
-              <p className="text-sm text-gray-500 font-medium">TRUSTED BY</p>
-              <div className="flex flex-wrap gap-6">
-                {trustBadges.map((badge, index) => (
-                  <motion.div
-                    key={badge}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                    className="text-gray-400 font-semibold text-sm hover:text-[#0192dd] transition-colors duration-200"
-                  >
-                    {badge}
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
           </motion.div>
 

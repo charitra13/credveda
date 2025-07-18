@@ -12,9 +12,11 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.0.2 (Current)
+### Version 1.0.3 (Current)
 **Date**: Current Release  
 **Changes**:
+- **Content Removal**: Removed "TRUSTED BY" section from hero component including company names (Bloomberg, ET, Business Standard, Economic Times)
+- **Component**: `components/hero.tsx` - Removed trustBadges array and entire Trust Badges section
 - **Content Removal**: Completely removed the "Have More Questions?" support section from the website
 - **Files Modified**: 
   - `app/page.tsx` - Removed Support component import and usage
