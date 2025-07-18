@@ -1,11 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { MessageCircle, Send, X, HelpCircle } from "lucide-react"
+import { MessageCircle, Send, X, HelpCircle, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useAnimation } from "framer-motion"
 import { faqData } from "@/lib/faq-data"
 
 interface Message {
@@ -16,16 +16,55 @@ interface Message {
 }
 
 export function FloatingChat() {
+  // Add styles for speech bubble arrows
+  React.useEffect(() => {
+    const style = document.createElement('style')
+    style.textContent = `
+      .message-bubble-bot::before {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        left: -8px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 8px 0 0;
+        border-color: #e2e8f0 transparent transparent transparent;
+        z-index: 1;
+      }
+      
+      .message-bubble-user::after {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        right: -8px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 0 0 8px;
+        border-color: #2563eb transparent transparent transparent;
+        z-index: 1;
+      }
+    `
+    document.head.appendChild(style)
+    
+    return () => {
+      document.head.removeChild(style)
+    }
+  }, [])
+
   const [messages, setMessages] = React.useState<Message[]>([
     {
       id: 1,
-      text: "Hello! Welcome to CredVeda. I'm here to help you with your credit analysis questions. You can click on any FAQ above or type your own question!",
+      text: "Hello! Welcome to CredVeda. I'm here to help you with your credit analysis questions. You can click on any FAQ below or type your own question!",
       sender: "bot",
       timestamp: new Date(),
     },
   ])
   const [inputMessage, setInputMessage] = React.useState("")
   const [isOpen, setIsOpen] = React.useState(false)
+  const [isFAQExpanded, setIsFAQExpanded] = React.useState(false)
+  const scrollAreaRef = React.useRef<HTMLDivElement>(null)
 
   // Handle ESC key to close chat
   React.useEffect(() => {
@@ -52,21 +91,72 @@ export function FloatingChat() {
     setMessages((prev) => [...prev, userMessage])
     setInputMessage("")
 
+    // Scroll to bottom to show the user message
+    setTimeout(() => {
+      scrollToBottom(true)
+    }, 50)
+
     // Simulate bot response
     setTimeout(() => {
       const botMessage: Message = {
         id: messages.length + 2,
-        text: "Thank you for your message! Our team will get back to you shortly. In the meantime, you can explore our AI-powered credit analysis features.",
+        text: "Thank you for your question! Our AI chatbot features are currently being implemented by our development team. Meanwhile, I can help you set an EMI reminder for your loan payments! Would you like me to assist you with setting up EMI reminders to stay on top of your financial commitments?",
         sender: "bot",
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, botMessage])
+      
+      // Scroll to bottom to show the new message
+      setTimeout(() => {
+        scrollToBottom(true)
+      }, 150)
     }, 1000)
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       handleSendMessage()
+    }
+  }
+
+  const scrollToBottom = (smooth: boolean = true) => {
+    if (scrollAreaRef.current) {
+      const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]')
+      if (scrollContainer) {
+        const targetScrollTop = scrollContainer.scrollHeight - scrollContainer.clientHeight
+        
+        if (smooth) {
+          // Use framer motion for smooth animated scroll
+          const startScrollTop = scrollContainer.scrollTop
+          const distance = targetScrollTop - startScrollTop
+          
+          if (Math.abs(distance) > 10) { // Only animate if there's a significant scroll distance
+            const duration = Math.min(800, Math.max(300, Math.abs(distance) * 2)) // Dynamic duration based on distance
+            
+            const startTime = performance.now()
+            
+            const animateScroll = (currentTime: number) => {
+              const elapsed = currentTime - startTime
+              const progress = Math.min(elapsed / duration, 1)
+              
+              // Smooth easing function (ease-out)
+              const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+              
+              scrollContainer.scrollTop = startScrollTop + (distance * easeOutQuart)
+              
+              if (progress < 1) {
+                requestAnimationFrame(animateScroll)
+              }
+            }
+            
+            requestAnimationFrame(animateScroll)
+          } else {
+            scrollContainer.scrollTop = targetScrollTop
+          }
+        } else {
+          scrollContainer.scrollTop = targetScrollTop
+        }
+      }
     }
   }
 
@@ -88,6 +178,11 @@ export function FloatingChat() {
     }
 
     setMessages((prev) => [...prev, userMessage, botMessage])
+
+    // Scroll to bottom to show the new messages with coordinated timing
+    setTimeout(() => {
+      scrollToBottom(true)
+    }, 150) // Slightly delayed to let message animations start
   }
 
     return (
@@ -158,45 +253,28 @@ export function FloatingChat() {
                 </Button>
               </div>
 
-              {/* FAQ Quick Access Section */}
-              <div className="p-4 pb-2 border-b flex-shrink-0">
-                <div className="flex items-center gap-2 mb-3">
-                  <HelpCircle className="h-4 w-4 text-blue-600" />
-                  <span className="text-sm font-medium text-gray-700">Frequently Asked Questions</span>
-                </div>
-                <div className="grid grid-cols-1 gap-2 max-h-32 overflow-y-auto">
-                  {faqData.map((faq) => (
-                    <motion.button
-                      key={faq.id}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => handleFAQClick(faq)}
-                      className="text-left p-2 text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-md transition-colors border border-blue-200 truncate"
-                    >
-                      {faq.question}
-                    </motion.button>
-                  ))}
-                </div>
-              </div>
-              
               {/* Messages Area */}
-              <ScrollArea className="flex-1 p-4">
+              <ScrollArea ref={scrollAreaRef} className="flex-1 p-4">
                 <div className="space-y-4">
-                  {messages.map((message) => (
+                  {messages.map((message, index) => (
                     <motion.div
                       key={message.id}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
+                      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ 
+                        duration: 0.4,
+                        delay: index === messages.length - 1 ? 0.1 : 0, // Slight delay for the latest message
+                        ease: [0.23, 1, 0.32, 1] // Custom ease for smooth feel
+                      }}
                       className={`flex ${
                         message.sender === "user" ? "justify-end" : "justify-start"
                       }`}
                     >
                       <div
-                        className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
+                        className={`max-w-[80%] rounded-lg px-3 py-2 text-sm relative ${
                           message.sender === "user"
-                            ? "bg-blue-600 text-white"
-                            : "bg-muted text-foreground"
+                            ? "bg-blue-600 text-white message-bubble-user"
+                            : "bg-muted text-foreground message-bubble-bot"
                         }`}
                       >
                         {message.text}
@@ -205,6 +283,67 @@ export function FloatingChat() {
                   ))}
                 </div>
               </ScrollArea>
+
+              {/* FAQ Quick Access Section */}
+              <div className="border-t flex-shrink-0">
+                <div className="p-4 pt-2 pb-2">
+                  <button
+                    onClick={() => setIsFAQExpanded(!isFAQExpanded)}
+                    className="flex items-center justify-between w-full group hover:bg-gray-50 rounded-md p-1 -m-1 transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      <HelpCircle className="h-4 w-4 text-blue-600" />
+                      <span className="text-sm font-medium text-gray-700">Frequently Asked Questions</span>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: isFAQExpanded ? 0 : -90 }}
+                      transition={{ duration: 0.2, ease: "easeInOut" }}
+                    >
+                      <ChevronDown className="h-4 w-4 text-gray-500 group-hover:text-gray-700 transition-colors" />
+                    </motion.div>
+                  </button>
+                </div>
+                
+                <AnimatePresence>
+                  {isFAQExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-4 pb-4">
+                        <div className="grid grid-cols-1 gap-2 max-h-32 overflow-y-auto overflow-x-hidden">
+                          {faqData.map((faq) => (
+                            <motion.button
+                              key={faq.id}
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ duration: 0.2, delay: 0.1 }}
+                              whileHover={{ 
+                                scale: 1.02,
+                                backgroundColor: "#dbeafe",
+                                transition: { duration: 0.2 }
+                              }}
+                              whileTap={{ 
+                                scale: 0.95,
+                                backgroundColor: "#bfdbfe",
+                                transition: { duration: 0.1 }
+                              }}
+                              onClick={() => handleFAQClick(faq)}
+                              className="text-left p-2 text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-md transition-colors border border-blue-200 truncate"
+                            >
+                              {faq.question}
+                            </motion.button>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               
               {/* Input Area */}
               <div className="border-t p-4 flex-shrink-0">

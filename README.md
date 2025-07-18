@@ -12,8 +12,18 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.1.1 (Current)
+### Version 1.1.2 (Current)
 **Date**: Current Release  
+**Changes**:
+- **Chat UX Improvement**: Changed FAQ panel default state
+  - FAQ panel now starts collapsed when chat window opens
+  - Users can expand FAQ panel manually if needed
+  - Improved user experience with less cluttered initial chat view
+- **Components Modified**:
+  - `components/floating-chat.tsx` - Changed isFAQExpanded default state from true to false
+
+### Version 1.1.1
+**Date**: Previous Release  
 **Changes**:
 - **FAQ Content Update**: Corrected NBFC connection claims
   - Updated FAQ answer for "Can I compare loans from multiple NBFCs?"
