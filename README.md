@@ -12,8 +12,22 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.1.5 (Current)
+### Version 1.1.6 (Current)
 **Date**: Current Release  
+**Changes**:
+- **Analysis Type Cards Redesign**: Updated "Choose Your Analysis Type" section to match provided design mockup
+  - Enhanced title styling with "Analysis Type" highlighted in brand blue color
+  - Redesigned card gradients to match target design (emerald-teal, orange, slate)
+  - Implemented larger circular elements (128px) with backdrop blur and borders
+  - Improved typography and spacing throughout cards
+  - Enhanced hover effects with subtle gradient overlays
+  - Moved icons to top-right in styled containers
+  - Centered descriptions at bottom of cards for better visual hierarchy
+- **Components Modified**:
+  - `components/card-design.tsx` - Complete redesign of card layout and styling
+
+### Version 1.1.5
+**Date**: Previous Release  
 **Changes**:
 - **Chat Notification Popup**: Added engaging notification popup for chat icon
   - Notification appears 3 seconds after page load to encourage user interaction
