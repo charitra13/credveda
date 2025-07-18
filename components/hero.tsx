@@ -26,7 +26,7 @@ export function Hero() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight"
               >
-                We exist -- because <span className="text-[#0192dd]">'Sign here, sir'</span> isn't financial advice.
+                We exist — because <span className="text-[#0192dd]">'Sign here, sir'</span> isn't financial advice.
               </motion.h1>
 
               <motion.p
