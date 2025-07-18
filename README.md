@@ -12,9 +12,18 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.0.4 (Current)
+### Version 1.0.5 (Current)
 **Date**: Current Release  
 **Changes**:
+- **Navigation Enhancement**: Added smooth scrolling navigation functionality
+  - "Home" button scrolls to hero section (#home)
+  - "Features" button scrolls to features section (#features)  
+  - "About" button scrolls to analysis section (#about)
+- **Components Modified**:
+  - `components/header.tsx` - Added scroll navigation with handleNavClick function
+  - `components/hero.tsx` - Added id="home"
+  - `components/features.tsx` - Added id="features"
+  - `components/analysis.tsx` - Added id="about"
 - **Navigation Update**: Removed "Sign Up" button from navigation bar in both desktop and mobile views
 - **Component**: `components/header.tsx` - Removed "Sign Up" from navItems array
 - **Content Removal**: Removed "TRUSTED BY" section from hero component including company names (Bloomberg, ET, Business Standard, Economic Times)

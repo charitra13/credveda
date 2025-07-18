@@ -8,7 +8,19 @@ import { Button } from "@/components/ui/button"
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const navItems = ["Home", "Features", "About"]
+  const navItems = [
+    { name: "Home", href: "#home" },
+    { name: "Features", href: "#features" },
+    { name: "About", href: "#about" }
+  ]
+
+  const handleNavClick = (href: string) => {
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+    setIsMenuOpen(false)
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
@@ -27,16 +39,16 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
-              <motion.a
-                key={item}
-                href="#"
+              <motion.button
+                key={item.name}
+                onClick={() => handleNavClick(item.href)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-gray-700 hover:text-[#0192dd] transition-colors duration-200 font-medium"
               >
-                {item}
-              </motion.a>
+                {item.name}
+              </motion.button>
             ))}
           </nav>
 
@@ -76,17 +88,16 @@ export function Header() {
             <div className="container mx-auto px-4 py-4">
               <nav className="flex flex-col space-y-4">
                 {navItems.map((item, index) => (
-                  <motion.a
-                    key={item}
-                    href="#"
+                  <motion.button
+                    key={item.name}
+                    onClick={() => handleNavClick(item.href)}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="text-gray-700 hover:text-[#0192dd] transition-colors duration-200 font-medium py-2"
-                    onClick={() => setIsMenuOpen(false)}
+                    className="text-gray-700 hover:text-[#0192dd] transition-colors duration-200 font-medium py-2 text-left"
                   >
-                    {item}
-                  </motion.a>
+                    {item.name}
+                  </motion.button>
                 ))}
               </nav>
             </div>

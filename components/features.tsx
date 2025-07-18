@@ -28,7 +28,7 @@ export function Features() {
   ]
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section id="features" className="py-20 bg-white relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 opacity-5">
         <div

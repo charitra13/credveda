@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 
 export function Analysis() {
   return (
-    <section className="py-20 bg-gray-900 text-white">
+    <section id="about" className="py-20 bg-gray-900 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
