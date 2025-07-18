@@ -57,10 +57,20 @@ export function Features() {
               key={feature.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: index * 0.05, ease: 'easeOut' }}
+              transition={{ duration: 0.3, delay: index * 0.03, ease: [0.25, 0.46, 0.45, 0.94] }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.04, y: -4, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
-              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300"
+              whileHover={{ 
+                scale: 1.02, 
+                y: -2,
+                transition: { 
+                  type: 'spring', 
+                  stiffness: 200, 
+                  damping: 12,
+                  mass: 0.8
+                } 
+              }}
+              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md will-change-transform"
+              style={{ transformOrigin: 'center' }}
             >
               <div className="mb-4">
                 <div className={`w-16 h-16 ${feature.iconBg} rounded-2xl flex items-center justify-center mb-6`}>

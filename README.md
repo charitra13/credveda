@@ -12,8 +12,34 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.1.6 (Current)
+### Version 1.1.8 (Current)
 **Date**: Current Release  
+**Changes**:
+- **Analysis Type Cards Content Simplification**: Removed unnecessary text elements and optimized card height for better design hierarchy
+  - **Text Removal**: Removed circular text elements ("GREEN TIER", "Personal", "AI Analytics") and bottom text sections from all three analysis type cards
+  - **Layout Optimization**: Simplified card structure by removing central circular elements and redundant text displays
+  - **Height Reduction**: Reduced card minimum height from 500px to 320px (36% reduction) to match content amount
+  - **Content Restructuring**: Moved card descriptions to central focus area for improved readability
+  - **Visual Enhancements**: Added subtle background decorations with blur effects for maintained visual appeal
+  - **Design Hierarchy**: Improved information hierarchy by focusing on titles, subtypes, and descriptions
+- **Components Modified**:
+  - `components/card-design.tsx` - Removed text elements, reduced card height, and restructured content layout
+
+### Version 1.1.7
+**Date**: Previous Release  
+**Changes**:
+- **Animation Performance Optimization**: Fixed slow and laggy hover effects in card components
+  - **Features Section**: Optimized hover animations with reduced spring stiffness (300→200), improved damping (20→12), and subtle scale effects (1.04→1.02)
+  - **Analysis Type Cards**: Enhanced animation responsiveness with optimized spring physics (stiffness: 180, damping: 10) and reduced movement intensity
+  - **Performance Improvements**: Added GPU acceleration with `will-change-transform`, removed CSS/Framer Motion conflicts, and implemented better easing curves
+  - **Animation Timing**: Reduced durations and delays for snappier user interactions
+  - **Technical Enhancements**: Fixed gradient overlay animations and added proper transform origins for smoother motion
+- **Components Modified**:
+  - `components/features.tsx` - Optimized hover animations and removed transition conflicts
+  - `components/card-design.tsx` - Enhanced spring physics and converted CSS animations to Framer Motion
+
+### Version 1.1.6
+**Date**: Previous Release  
 **Changes**:
 - **Analysis Type Cards Redesign**: Updated "Choose Your Analysis Type" section to match provided design mockup
   - Enhanced title styling with "Analysis Type" highlighted in brand blue color

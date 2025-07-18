@@ -88,6 +88,17 @@ export function FloatingChat() {
     return () => clearTimeout(timer)
   }, [])
 
+  // Auto-hide notification after 5 seconds of appearing
+  React.useEffect(() => {
+    if (showNotification) {
+      const timer = setTimeout(() => {
+        setShowNotification(false)
+      }, 5000) // Hide after 5 seconds
+
+      return () => clearTimeout(timer)
+    }
+  }, [showNotification])
+
   // Hide notification when chat is opened
   React.useEffect(() => {
     if (isOpen) {
@@ -212,22 +223,22 @@ export function FloatingChat() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 10 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="absolute bottom-16 right-0 mb-2 max-w-xs"
+            className="absolute bottom-16 right-0 mb-2 w-80 max-w-sm"
           >
-            <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 relative">
+            <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-3 relative">
               {/* Speech bubble arrow */}
               <div className="absolute bottom-0 right-6 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-white transform translate-y-full"></div>
               <div className="absolute bottom-0 right-6 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-200 transform translate-y-full translate-x-0"></div>
               
-              <div className="flex items-start gap-3">
+              <div className="flex items-center gap-3">
                 <div className="flex-shrink-0">
                   <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                     <MessageCircle className="w-4 h-4 text-blue-600" />
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 mb-1">Need help?</p>
-                  <p className="text-xs text-gray-600">Chat with us to know more about credit analysis!</p>
+                  <p className="text-sm font-medium text-gray-900">Need help?</p>
+                  <p className="text-xs text-gray-600">Chat with us about credit analysis!</p>
                 </div>
                 <button
                   onClick={() => setShowNotification(false)}

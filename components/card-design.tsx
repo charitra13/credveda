@@ -10,8 +10,6 @@ export function CardDesign() {
       subtitle: "Credit Tier Analysis",
       icon: Shield,
       gradient: "from-emerald-400 via-green-500 to-teal-600",
-      circleText: "GREEN TIER",
-      bottomText: "GREEN TIER",
       description: "Basic tier classification and recommendations",
     },
     {
@@ -19,8 +17,6 @@ export function CardDesign() {
       subtitle: "Loan Category Analysis",
       icon: Target,
       gradient: "from-orange-400 via-orange-500 to-orange-600",
-      circleText: "Personal",
-      bottomText: "Personal/Home/Business",
       description: "Analyze eligibility across loan categories",
     },
     {
@@ -28,8 +24,6 @@ export function CardDesign() {
       subtitle: "Comprehensive Report", 
       icon: BarChart3,
       gradient: "from-slate-700 via-slate-800 to-slate-900",
-      circleText: "AI Analytics",
-      bottomText: "AI Analytics",
       description: "Complete AI analysis with explanations",
     },
   ]
@@ -56,13 +50,23 @@ export function CardDesign() {
               key={card.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.08, ease: 'easeOut' }}
+              transition={{ duration: 0.3, delay: index * 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5, transition: { type: 'spring', stiffness: 260, damping: 18 } }}
-              className="relative group cursor-pointer"
+              whileHover={{ 
+                scale: 1.02, 
+             
+                transition: { 
+                  type: 'spring', 
+                  stiffness: 180, 
+                  damping: 10,
+                  mass: 0.6
+                } 
+              }}
+              className="relative group cursor-pointer will-change-transform"
+              style={{ transformOrigin: 'center' }}
             >
               <div
-                className={`bg-gradient-to-br ${card.gradient} rounded-3xl p-8 text-white shadow-xl hover:shadow-2xl transition-all duration-300 min-h-[500px] flex flex-col relative overflow-hidden`}
+                className={`bg-gradient-to-br ${card.gradient} rounded-3xl p-8 text-white shadow-xl min-h-[320px] flex flex-col relative overflow-hidden`}
               >
                 {/* Header with icon */}
                 <div className="flex items-center justify-between mb-8">
@@ -75,30 +79,18 @@ export function CardDesign() {
                   </div>
                 </div>
 
-                {/* Central circular element */}
-                <div className="flex-1 flex flex-col items-center justify-center space-y-6">
-                  <div className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                    <span className="text-lg font-bold text-center leading-tight px-2">
-                      {card.circleText}
-                    </span>
-                  </div>
-                  
+                {/* Central content area */}
+                <div className="flex-1 flex flex-col items-center justify-center">
                   <div className="text-center">
-                    <p className="text-xl font-bold tracking-wide">
-                      {card.bottomText}
+                    <p className="text-lg text-white/90 leading-relaxed">
+                      {card.description}
                     </p>
                   </div>
                 </div>
 
-                {/* Description at bottom */}
-                <div className="mt-auto pt-6">
-                  <p className="text-white/90 leading-relaxed text-center font-medium">
-                    {card.description}
-                  </p>
-                </div>
-
-                {/* Subtle gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
+                {/* Background decoration */}
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+                <div className="absolute -top-4 -left-4 w-16 h-16 bg-white/10 rounded-full blur-lg"></div>
               </div>
             </motion.div>
           ))}
