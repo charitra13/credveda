@@ -40,7 +40,7 @@ export function CardDesign() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
@@ -56,9 +56,9 @@ export function CardDesign() {
               key={card.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.4, delay: index * 0.08, ease: 'easeOut' }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.02, y: -5 }}
+              whileHover={{ scale: 1.05, y: -5, transition: { type: 'spring', stiffness: 260, damping: 18 } }}
               className="relative group cursor-pointer"
             >
               <div
