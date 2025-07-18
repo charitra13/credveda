@@ -12,8 +12,20 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.1.3 (Current)
+### Version 1.1.4 (Current)
 **Date**: Current Release  
+**Changes**:
+- **FAQ Section Removal**: Removed FAQ section from webpage
+  - Completely removed FAQ section since functionality moved to chatbot
+  - Removed FAQ import and component from main page layout
+  - Updated footer navigation to remove FAQ link
+  - Streamlined page layout focusing on core sections
+- **Components Modified**:
+  - `app/page.tsx` - Removed FAQ import and component
+  - `components/footer.tsx` - Removed FAQ navigation item
+
+### Version 1.1.3
+**Date**: Previous Release  
 **Changes**:
 - **Footer Navigation Fix**: Implemented proper section navigation
   - Fixed footer quick links to redirect to correct sections instead of just home

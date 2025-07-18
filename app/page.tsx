@@ -6,8 +6,6 @@ import { Hero } from "@/components/hero"
 import { Features } from "@/components/features"
 import { CardDesign } from "@/components/card-design"
 import { Analysis } from "@/components/analysis"
-import { FAQ } from "@/components/faq"
-
 import { Footer } from "@/components/footer"
 import { MobileCTA } from "@/components/mobile-cta"
 
@@ -24,7 +22,6 @@ export default function Home() {
       <Features />
       <CardDesign />
       <Analysis />
-      <FAQ />
       <Footer />
       <MobileCTA />
     </motion.div>
