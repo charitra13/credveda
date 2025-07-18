@@ -64,6 +64,7 @@ export function FloatingChat() {
   const [inputMessage, setInputMessage] = React.useState("")
   const [isOpen, setIsOpen] = React.useState(false)
   const [isFAQExpanded, setIsFAQExpanded] = React.useState(false)
+  const [showNotification, setShowNotification] = React.useState(false)
   const scrollAreaRef = React.useRef<HTMLDivElement>(null)
 
   // Handle ESC key to close chat
@@ -76,6 +77,22 @@ export function FloatingChat() {
 
     document.addEventListener("keydown", handleEscape)
     return () => document.removeEventListener("keydown", handleEscape)
+  }, [isOpen])
+
+  // Show notification popup after a delay
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowNotification(true)
+    }, 3000) // Show after 3 seconds
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  // Hide notification when chat is opened
+  React.useEffect(() => {
+    if (isOpen) {
+      setShowNotification(false)
+    }
   }, [isOpen])
 
   const handleSendMessage = () => {
@@ -187,6 +204,43 @@ export function FloatingChat() {
 
     return (
     <div className="fixed bottom-6 right-6 z-50">
+      {/* Notification Popup */}
+      <AnimatePresence>
+        {showNotification && !isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="absolute bottom-16 right-0 mb-2 max-w-xs"
+          >
+            <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 relative">
+              {/* Speech bubble arrow */}
+              <div className="absolute bottom-0 right-6 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-white transform translate-y-full"></div>
+              <div className="absolute bottom-0 right-6 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-200 transform translate-y-full translate-x-0"></div>
+              
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <MessageCircle className="w-4 h-4 text-blue-600" />
+                  </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900 mb-1">Need help?</p>
+                  <p className="text-xs text-gray-600">Chat with us to know more about credit analysis!</p>
+                </div>
+                <button
+                  onClick={() => setShowNotification(false)}
+                  className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <Button
         size="icon"
         onClick={() => setIsOpen(!isOpen)}

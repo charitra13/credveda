@@ -12,8 +12,20 @@ CredVeda is a modern web application that provides AI-powered credit profile ana
 
 ## Changelog
 
-### Version 1.1.4 (Current)
+### Version 1.1.5 (Current)
 **Date**: Current Release  
+**Changes**:
+- **Chat Notification Popup**: Added engaging notification popup for chat icon
+  - Notification appears 3 seconds after page load to encourage user interaction
+  - Popup shows "Need help? Chat with us to know more about credit analysis!"
+  - Auto-hides when chat is opened or can be manually dismissed
+  - Includes speech bubble design with smooth animations
+  - Positioned above chat button with proper z-index handling
+- **Components Modified**:
+  - `components/floating-chat.tsx` - Added notification state, timers, and popup component
+
+### Version 1.1.4
+**Date**: Previous Release  
 **Changes**:
 - **FAQ Section Removal**: Removed FAQ section from webpage
   - Completely removed FAQ section since functionality moved to chatbot
