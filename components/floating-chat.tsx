@@ -225,7 +225,7 @@ export function FloatingChat() {
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="absolute bottom-16 right-0 mb-2 w-80 max-w-sm"
           >
-            <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-3 relative">
+            <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-3 relative hover:shadow-xl transition-shadow duration-200">
               {/* Speech bubble arrow */}
               <div className="absolute bottom-0 right-6 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-white transform translate-y-full"></div>
               <div className="absolute bottom-0 right-6 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-200 transform translate-y-full translate-x-0"></div>
@@ -236,7 +236,10 @@ export function FloatingChat() {
                     <MessageCircle className="w-4 h-4 text-blue-600" />
                   </div>
                 </div>
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 cursor-pointer hover:bg-gray-50 rounded-md p-1 -m-1 transition-colors" onClick={() => {
+                  setIsOpen(true)
+                  setShowNotification(false)
+                }}>
                   <p className="text-sm font-medium text-gray-900">Need help?</p>
                   <p className="text-xs text-gray-600">Chat with us about credit analysis!</p>
                 </div>
